@@ -1,12 +1,15 @@
 let text=document.getElementById("text");
 let list=document.getElementById("list");
-
+let idCounter = 0;
 /*
     Achim
 
     tr get id
 */
 function add() {
+    
+
+    idCounter++;
     return true;
 }
 
