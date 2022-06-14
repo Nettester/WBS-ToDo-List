@@ -1,5 +1,6 @@
-let text=document.getElementById("text");
-let list=document.getElementById("list");
+const text= document.getElementsByClassName("text");
+const list= document.getElementById("list");
+
 let idCounter = 0;
 /*
     Achim
@@ -7,7 +8,7 @@ let idCounter = 0;
     tr get id
 */
 function add() {
-    
+
 
     idCounter++;
     return true;
@@ -18,15 +19,19 @@ function add() {
 
     del tr with id
 */
-function del() {
+function del(id) {
+    
     return true;
 }
 
 /*
    David 
 */
-function edit() {
-    return true;
+function edit(id) {
+    const text = (id) => document.querySelector("#tr_id_"+id+".text").textContent;
+    const tableRow = elementById(id);
+    const rowElement = tableRow.getElementsByClassName("text");
+    
 }
 
 /*

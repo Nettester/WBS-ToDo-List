@@ -20,11 +20,17 @@
             td.text 
         -->
         <table id="list">
-            <tr id="">
-                <td>checkbox</td>
-                <td>text todo</td>
-                <td>löschen</td>
-                <td>edit</td>
+            <tr id="tr_id_0">
+                <td>
+                    <input type="checkbox" class="form-check-input" value="checkedValue" >
+                </td>
+                <td class="text">Beispiel ToDo-Element</td>
+                <td>
+                    <input type="button" onclick="edit(0)"><img src="" alt="Edit">
+                </td>
+                <td>
+                    <input type="button" onclick="del(0)"><img src="" alt="Delete">
+                </td>
             </tr>
         </table>
     </div>
