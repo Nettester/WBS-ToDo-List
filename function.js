@@ -1,5 +1,7 @@
 let text=document.getElementById("text");
 let list=document.getElementById("list");
+const acceptImage = "./images/accept*";
+const editImage = "./images/edit*";
 let idCounter = 0;
 /*
     Achim
@@ -50,7 +52,7 @@ function edit(id) {
     // set input-field with todo-text
     todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
     // generate accept edit button and accept image
-    const acceptEditButton = `<input type="button" class="acceptButton" onclick="acceptEdit(${id})"><img src="" alt="accept">`;
+    const acceptEditButton = `<input type="button" class="acceptButton" onclick="acceptEdit(${id})"><img src="${acceptImage}" alt="Accept">`;
     // set accept button in third td
     tableRow.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
 }
@@ -63,11 +65,12 @@ function acceptEdit(id) {
     // get text-input element / accept button / accept image
     const editInput = todoTd.querySelector(".editInput");
     const acceptButton = tableRow.querySelector(".acceptButton");
-    const acceptImage = tableRow.querySelector(".img");
+    const acceptImage = tableRow.querySelector("img");
     // get value of the text-input element
     const todoValue = editInput.value;
+    console.log(todoValue);
     // generate edit-button
-    const editButton = `<input type="button" class="editButton" onclick="edit(${id})"><img src="" alt="Edit">`;
+    const editButton = `<input type="button" class="editButton" onclick="edit(${id})"><img src="${editImage}" alt="Edit">`;
     // remove input text-field / accept Button / image
     editInput.remove();
     acceptButton.remove();
