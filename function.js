@@ -17,8 +17,7 @@ function add() {
     Seo
 
     del tr with id
-*/
-    
+*/  
 function del(index) {
     const tableDelet = document.querySelector(`#tr_id_${index}`);
     const isExecuted = confirm("Are you sure to delete this row?");
@@ -28,18 +27,30 @@ function del(index) {
 
 }
 
+
 /*
    David 
 */
-function edit() {
-    return true;
+function edit(id) {
+    // get table row
+    let tableRow = document.querySelector(`#tr_id_${id}`);
+    // get td with todo-text
+    let todoTd = tableRow.querySelector(".text");
+    // get value of the td
+    let todoValue = todoTd.innerHTML;
+    // get edit-button
+    let editButton = tableRow.querySelector(`.editButton`);
+    console.log(todoValue);
+    // clear td
+    todoTd.innerText="";
+    // set input-field with todo-text
+    todoTd.innerHTML = `<input type="text" value="${todoValue}">`
 }
+
 
 /*
   Abdulaziz  
 */
-
-
 function checked ()
 {
     let elem, cell, next = 0;
