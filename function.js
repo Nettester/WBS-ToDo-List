@@ -1,15 +1,13 @@
-const text= document.getElementsByClassName("text");
-const list= document.getElementById("list");
-
-let idCounter = 1;
-
+let text=document.getElementById("text");
+let list=document.getElementById("list");
+let idCounter = 0;
 /*
     Achim
 
     tr get id
 */
 function add() {
-
+    
 
     idCounter++;
     return true;
@@ -20,24 +18,28 @@ function add() {
 
     del tr with id
 */
-function del(id) {
     
-    return true;
+function del(index) {
+    const tableDelet = document.querySelector(`#tr_id_${index}`);
+    const isExecuted = confirm("Are you sure to delete this row?");
+    if(isExecuted === true){
+        tableDelet.parentNode.remove();
+    }
+
 }
 
 /*
    David 
 */
-function edit(id) {
-    const text = (id) => document.querySelector("#tr_id_"+id+".text").textContent;
-    const tableRow = elementById(id);
-    const rowElement = tableRow.getElementsByClassName("text");
-    
+function edit() {
+    return true;
 }
 
 /*
   Abdulaziz  
 */
+
+
 function checked ()
 {
     let elem, cell, next = 0;
@@ -84,6 +86,7 @@ function checked ()
         next++;
     }
     // *** //
+
     return true;
 }
 
