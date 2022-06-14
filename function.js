@@ -33,18 +33,29 @@ function del(index) {
 */
 function edit(id) {
     // get table row
-    let tableRow = document.querySelector(`#tr_id_${id}`);
+    const tableRow = document.querySelector(`#tr_id_${id}`);
     // get td with todo-text
-    let todoTd = tableRow.querySelector(".text");
+    const todoTd = tableRow.querySelector(".text");
     // get value of the td
-    let todoValue = todoTd.innerHTML;
+    const todoValue = todoTd.innerHTML;
     // get edit-button
-    let editButton = tableRow.querySelector(`.editButton`);
+    const editButton = tableRow.querySelector(`.editButton`);
     console.log(todoValue);
     // clear td
     todoTd.innerText="";
+    // clear edit button
+    editButton.remove;
     // set input-field with todo-text
-    todoTd.innerHTML = `<input type="text" value="${todoValue}">`
+    todoTd.innerHTML = `<input type="text" value="${todoValue}">`;
+    // generate accept edit button
+    acceptEditButton = `<button class="button" onclick="acceptEdit(${id})"><img src="" alt="accept"></button>`;
+    // set accept button in third td
+    tableRow.querySelector("td:nth-child(3)").append(acceptEditButton);
+}
+
+function acceptEdit(id) {
+    
+    
 }
 
 
