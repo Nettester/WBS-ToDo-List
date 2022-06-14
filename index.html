@@ -20,35 +20,17 @@
             td.text 
         -->
         <table id="list">
-            <tr id="tr0">
-                <td><input type = "checkbox"></td>
-                <td>abc</td>
-                <td><button onclick = "del()">Löschen</button></td>
-                <td><button onclick = "edit()">Bearbeiten</button></td>
-            </tr>
-            <tr id="tr1">
-                <td><input type = "checkbox"></td>
-                <td>def</td>
-                <td><button onclick = "del()">Löschen</button></td>
-                <td><button onclick = "edit()">Bearbeiten</button></td>
-            </tr>
-            <tr id="tr2">
-                <td><input type = "checkbox"></td>
-                <td>ghi</td>
-                <td><button onclick = "del()">Löschen</button></td>
-                <td><button onclick = "edit()">Bearbeiten</button></td>
-            </tr>
-            <tr id="tr3">
-                <td><input type = "checkbox"></td>
-                <td>jkl</td>
-                <td><button onclick = "del()">Löschen</button></td>
-                <td><button onclick = "edit()">Bearbeiten</button></td>
-            </tr>
-            <tr id="tr4">
-                <td><input type = "checkbox"></td>
-                <td>mno</td>
-                <td><button onclick = "del()">Löschen</button></td>
-                <td><button onclick = "edit()">Bearbeiten</button></td>
+            <tr id="tr_id_0">
+                <td>
+                    <input type="checkbox" class="form-check-input" value="checkedValue" >
+                </td>
+                <td class="text">Beispiel ToDo-Element</td>
+                <td>
+                    <input type="button" onclick="edit(0)"><img src="" alt="Edit">
+                </td>
+                <td>
+                    <input type="button" onclick="del(0)"><img src="" alt="Delete">
+                </td>
             </tr>
         </table>
     </div>
