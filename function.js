@@ -28,7 +28,7 @@ function del(id) {
 /*
    David 
 */
-function edit(id,button) {
+function edit(id) {
     // get table row
     let tableRow = document.querySelector(`#tr_id_${id}`);
     // get td with todo-text
@@ -44,9 +44,7 @@ function edit(id,button) {
     todoTd.innerHTML = `<input type="text" value="${todoValue}">`
 
 }
-function safe(event){
-    alert(event.id +" dioawjodaowjd "+ event);
-}
+
 
 /*
   Abdulaziz  
