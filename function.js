@@ -36,26 +36,45 @@ function edit(id) {
     const tableRow = document.querySelector(`#tr_id_${id}`);
     // get td with todo-text
     const todoTd = tableRow.querySelector(".text");
+
     // get value of the td
-    const todoValue = todoTd.innerHTML;
-    // get edit-button
+    let todoValue = todoTd.innerHTML;
+    // get edit-button / edit-image
     const editButton = tableRow.querySelector(`.editButton`);
-    console.log(todoValue);
-    // clear td
+    const image = tableRow.querySelector("img");
+    // clear todo-text
     todoTd.innerText="";
-    // clear edit button
-    editButton.remove;
+    // clear edit button and edit image
+    editButton.remove();
+    image.remove();
     // set input-field with todo-text
-    todoTd.innerHTML = `<input type="text" value="${todoValue}">`;
-    // generate accept edit button
-    acceptEditButton = `<button class="button" onclick="acceptEdit(${id})"><img src="" alt="accept"></button>`;
+    todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
+    // generate accept edit button and accept image
+    const acceptEditButton = `<input type="button" class="acceptButton" onclick="acceptEdit(${id})"><img src="" alt="accept">`;
     // set accept button in third td
-    tableRow.querySelector("td:nth-child(3)").append(acceptEditButton);
+    tableRow.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
 }
 
 function acceptEdit(id) {
-    
-    
+    // get table row
+    const tableRow = document.querySelector(`#tr_id_${id}`);
+    // get td with todo-text
+    const todoTd = tableRow.querySelector(".text");
+    // get text-input element / accept button / accept image
+    const editInput = todoTd.querySelector(".editInput");
+    const acceptButton = tableRow.querySelector(".acceptButton");
+    const acceptImage = tableRow.querySelector(".img");
+    // get value of the text-input element
+    const todoValue = editInput.value;
+    // generate edit-button
+    const editButton = `<input type="button" class="editButton" onclick="edit(${id})"><img src="" alt="Edit">`;
+    // remove input text-field / accept Button / image
+    editInput.remove();
+    acceptButton.remove();
+    acceptImage.remove();
+    // set todo-text / edit button / edit image
+    todoTd.innerHTML = todoValue;
+    tableRow.querySelector("td:nth-child(3)").innerHTML = editButton;
 }
 
 
