@@ -28,11 +28,24 @@ function del(id) {
 /*
    David 
 */
-function edit(id) {
-    const text = (id) => document.querySelector("#tr_id_"+id+".text").textContent;
-    const tableRow = elementById(id);
-    const rowElement = tableRow.getElementsByClassName("text");
-    
+function edit(id,button) {
+    // get table row
+    let tableRow = document.querySelector(`#tr_id_${id}`);
+    // get td with todo-text
+    let todoTd = tableRow.querySelector(".text");
+    // get value of the td
+    let todoValue = todoTd.innerHTML;
+    // get edit-button
+    let editButton = tableRow.querySelector(`.editButton`);
+    console.log(todoValue);
+    // clear td
+    todoTd.innerText="";
+    // set input-field with todo-text
+    todoTd.innerHTML = `<input type="text" value="${todoValue}">`
+
+}
+function safe(event){
+    alert(event.id +" dioawjodaowjd "+ event);
 }
 
 /*
