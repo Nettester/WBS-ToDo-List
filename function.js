@@ -1,17 +1,26 @@
 let text=document.getElementById("text");
-let list=document.getElementById("list");
+let list;
 const acceptImage = "./images/accept.png";
 const editImage = "./images/edit.png";
 const deleteImage = "./images/delete.png";
 
-let idCounter = 0;
+let idCounter = 1;
 /*
     Achim
 
     tr get id
 */
 function add() {
-    
+  
+    let zeile = list.insertRow(0);
+
+
+    zeile.id = `tr_id_${idCounter}`;
+    zeile.innerHTML = `<td><input type="checkbox" class="form-check-input" value="checkedValue" ></td> `;
+    zeile.innerHTML +=`<td class="text"></td>`;
+    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="edit(${idCounter})" src="${editImage}" alt="Edit"></td>`;
+    zeile.innerHTML +=`<td><input type="image" class="delButton" onclick="del(${idCounter})" src="./images/delete.png" alt="Delete"></td>`;
+
 
     idCounter++;
     return true;
@@ -23,10 +32,10 @@ function add() {
     del tr with id
 */  
 function del(index) {
-    const tableDelet = document.querySelector(`#tr_id_${index}`);
+    const tableDelete = document.querySelector(`#tr_id_${index}`);
     const isExecuted = confirm("Are you sure to delete this row?");
     if(isExecuted === true){
-        tableDelet.parentNode.remove();
+        tableDelete.remove();
     }
 
 }
@@ -133,3 +142,7 @@ function checked ()
 setInterval( function () {
         checked();
 }, 500);
+
+
+
+
