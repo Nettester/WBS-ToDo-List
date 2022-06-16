@@ -4,9 +4,13 @@ const acceptImage = "./images/accept.png";
 const editImage = "./images/edit.png";
 const deleteImage = "./images/delete.png";
 
+// localStorage
 const storedToDos = localStorage.getItem('ToDos');
 const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
 const countSavedToDos = storedToDos.length;
+
+// constructors name = [edit,delete]
+const generateButton = (rowId,name,imgSrc) => `<input type="image" class="${name}Button" onclick="${name}(${rowId})" src="${imgSrc}" alt="${name}"></td>`;
 
 let idCounter = 1;
 /*
