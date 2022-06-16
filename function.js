@@ -1,6 +1,8 @@
 // localStorage
 const storedToDos = () => localStorage.getItem('ToDos');
 const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
+const delTodo = (id,text) => localStorage.removeItem('ToDos' , {id,text});
+
 
 // global selectors
 const tableRow = (rowId) => document.querySelector(`#tr_id_${rowId}`);
@@ -19,6 +21,7 @@ const generateDeleteButton = (rowId) => `<input type="image" class="delButton" o
 const generateAcceptButton = (rowId) => `<input type="image" class="acceptButton" onclick="acceptEdit(${rowId})" src="${acceptImage}" alt="Accept"></td>`
 
 let idCounter = 1;
+let skip = -1;
 
 /*
     Achim
@@ -76,6 +79,7 @@ function editToDo(rowId) {
     todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
     // set accept button in third td
     row.querySelector("td:nth-child(3)").innerHTML = generateAcceptButton(rowId);
+    skip = rowId;
 }
 
 function acceptEdit(rowId) {
@@ -94,6 +98,7 @@ function acceptEdit(rowId) {
     // set todo-text / edit button
     todoTd.innerHTML = todoValue;
     row.querySelector("td:nth-child(3)").innerHTML = generateEditButton(rowId);
+    skip = -1;
 }
 
 
@@ -122,6 +127,7 @@ function checked ()
     // *** //
     for ( let row of norm )
     {
+        if(skip!=next){
         elem = document.getElementById("tr_id_" + next);
         // *** //
         cell = elem.getElementsByTagName("td");
@@ -129,12 +135,14 @@ function checked ()
         cell[0].getElementsByTagName("input")[0].checked = false;
         // *** //
         cell[1].innerText = row;
+        }
         // *** //
         next++;
     }
     // *** //
     for ( let row of hook )
     {
+        if(skip!=next){
         elem = document.getElementById("tr_id_" + next);
         // *** //
         cell = elem.getElementsByTagName("td");
@@ -142,6 +150,7 @@ function checked ()
         cell[0].getElementsByTagName("input")[0].checked = true;
         // *** //
         cell[1].innerText = row;
+        }
         // *** //
         next++;
     }
