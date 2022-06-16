@@ -1,11 +1,11 @@
 // localStorage
-const storedToDos = localStorage.getItem('ToDos');
+const storedToDos = () => localStorage.getItem('ToDos');
 const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
 
 // global selectors
 const tableRow = (rowId) => document.querySelector(`#tr_id_${rowId}`);
-const text=document.getElementById("text");
-let list=document.getElementById("list");
+const text = document.getElementById("text");
+let list = document.getElementById("list");
 
 // image Source
 const acceptImage = "./images/accept.png";
