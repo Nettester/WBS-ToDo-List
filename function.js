@@ -4,6 +4,10 @@ const acceptImage = "./images/accept.png";
 const editImage = "./images/edit.png";
 const deleteImage = "./images/delete.png";
 
+const storedToDos = localStorage.getItem('ToDos');
+const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
+const countSavedToDos = storedToDos.length;
+
 let idCounter = 1;
 /*
     Achim
