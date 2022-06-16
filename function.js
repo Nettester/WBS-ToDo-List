@@ -3,6 +3,7 @@ const storedToDos = localStorage.getItem('ToDos');
 const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
 
 // global selectors
+const tableRow = (rowId) => document.querySelector(`#tr_id_${rowId}`);
 const text=document.getElementById("text");
 let list=document.getElementById("list");
 
@@ -60,13 +61,13 @@ function del(index) {
 */
 function editToDo(rowId) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${rowId}`);
+    const row = tableRow(rowId);
     // get td with todo-text
-    const todoTd = tableRow.querySelector(".text");
+    const todoTd = row.querySelector(".text");
     // get value of the td
     const todoValue = todoTd.innerHTML;
     // get edit-button
-    const editButton = tableRow.querySelector(`.editButton`);
+    const editButton = row.querySelector(`.editButton`);
     // clear todo-text
     todoTd.innerText="";
     // clear edit button and edit image
@@ -74,17 +75,17 @@ function editToDo(rowId) {
     // set input-field with todo-text
     todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
     // set accept button in third td
-    tableRow.querySelector("td:nth-child(3)").innerHTML = generateAcceptButton(rowId);
+    row.querySelector("td:nth-child(3)").innerHTML = generateAcceptButton(rowId);
 }
 
 function acceptEdit(rowId) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${rowId}`);
+    const row = tableRow(rowId);
     // get td with todo-text
-    const todoTd = tableRow.querySelector(".text");
+    const todoTd = row.querySelector(".text");
     // get text-input element / accept button
     const editInput = todoTd.querySelector(".editInput");
-    const acceptButton = tableRow.querySelector(".acceptButton");
+    const acceptButton = row.querySelector(".acceptButton");
     // get value of the text-input element
     const todoValue = editInput.value;
     // remove input text-field / accept Button / image
@@ -92,7 +93,7 @@ function acceptEdit(rowId) {
     acceptButton.remove();
     // set todo-text / edit button
     todoTd.innerHTML = todoValue;
-    tableRow.querySelector("td:nth-child(3)").innerHTML = generateEditButton(rowId);
+    row.querySelector("td:nth-child(3)").innerHTML = generateEditButton(rowId);
 }
 
 
