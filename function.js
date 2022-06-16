@@ -1,18 +1,24 @@
-let text=document.getElementById("text");
-let list;
+// localStorage
+const storedToDos = localStorage.getItem('ToDos');
+const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
+
+// global selectors
+const text=document.getElementById("text");
+let list=document.getElementById("list");
+
+// image Source
 const acceptImage = "./images/accept.png";
 const editImage = "./images/edit.png";
 const deleteImage = "./images/delete.png";
 
-// localStorage
-const storedToDos = localStorage.getItem('ToDos');
-const safeTodo = (id,text) => localStorage.setItem('ToDos' , {id,text});
-const countSavedToDos = storedToDos.length;
-
-// constructors name = [edit,delete]
-const generateButton = (rowId,name,imgSrc) => `<input type="image" class="${name}Button" onclick="${name}(${rowId})" src="${imgSrc}" alt="${name}"></td>`;
+// button constructor name = [edit,del,accept]
+//const generateButton = (rowId,name,imgSrc) => `<input type="image" class="${name}Button" onclick="${name}(${rowId})" src="${imgSrc}" alt="${name}"></td>`;
+const generateEditButton = (rowId) => `<input type="image" class="editButton" onclick="editToDo(${rowId})" src="${editImage}" alt="Edit"></td>`
+const generateDeleteButton = (rowId) => `<input type="image" class="delButton" onclick="del(${rowId})" src="${deleteImage}" alt="Delete"></td>`
+const generateAcceptButton = (rowId) => `<input type="image" class="acceptButton" onclick="acceptEdit(${rowId})" src="${acceptImage}" alt="Accept"></td>`
 
 let idCounter = 1;
+
 /*
     Achim
 
@@ -26,8 +32,8 @@ function add() {
     zeile.id = `tr_id_${idCounter}`;
     zeile.innerHTML = `<td><input type="checkbox" class="form-check-input" value="checkedValue" ></td> `;
     zeile.innerHTML +=`<td class="text"></td>`;
-    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="edit(${idCounter})" src="${editImage}" alt="Edit"></td>`;
-    zeile.innerHTML +=`<td><input type="image" class="delButton" onclick="del(${idCounter})" src="./images/delete.png" alt="Delete"></td>`;
+    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="editToDo(${idCounter})" src="${editImage}" alt="Edit"></td>`;
+    zeile.innerHTML +=`<td><input type="image" class="delButton" onclick="del(${idCounter})" src="${deleteImage}" alt="Delete"></td>`;
 
 
     idCounter++;
@@ -52,9 +58,9 @@ function del(index) {
 /*
    David 
 */
-function edit(id) {
+function editToDo(rowId) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${id}`);
+    const tableRow = document.querySelector(`#tr_id_${rowId}`);
     // get td with todo-text
     const todoTd = tableRow.querySelector(".text");
     // get value of the td
@@ -67,15 +73,13 @@ function edit(id) {
     editButton.remove();
     // set input-field with todo-text
     todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
-    // generate accept edit button as image
-    const acceptEditButton = `<input type="image" class="acceptButton" onclick="acceptEdit(${id})" src="${acceptImage}" alt="Accept">`;
     // set accept button in third td
-    tableRow.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
+    tableRow.querySelector("td:nth-child(3)").innerHTML = generateAcceptButton(rowId);
 }
 
-function acceptEdit(id) {
+function acceptEdit(rowId) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${id}`);
+    const tableRow = document.querySelector(`#tr_id_${rowId}`);
     // get td with todo-text
     const todoTd = tableRow.querySelector(".text");
     // get text-input element / accept button
@@ -83,14 +87,12 @@ function acceptEdit(id) {
     const acceptButton = tableRow.querySelector(".acceptButton");
     // get value of the text-input element
     const todoValue = editInput.value;
-    // generate edit-button (image as button)
-    const editButton = `<input type="image" class="editButton" onclick="edit(${id})" src="${editImage}" alt="Edit">`;
     // remove input text-field / accept Button / image
     editInput.remove();
     acceptButton.remove();
     // set todo-text / edit button
     todoTd.innerHTML = todoValue;
-    tableRow.querySelector("td:nth-child(3)").innerHTML = editButton;
+    tableRow.querySelector("td:nth-child(3)").innerHTML = generateEditButton(rowId);
 }
 
 
@@ -150,7 +152,3 @@ function checked ()
 setInterval( function () {
         checked();
 }, 500);
-
-
-
-
