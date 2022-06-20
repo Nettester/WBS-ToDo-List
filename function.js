@@ -9,6 +9,9 @@ const generateEditButton = (rowId) => `<input type="image" class="editButton" on
 const generateDeleteButton = (rowId) => `<input type="image" class="delButton" onclick="del(${rowId})" src="${deleteImage}" alt="Delete"></td>`
 const generateAcceptButton = (rowId) => `<input type="image" class="acceptButton" onclick="acceptEdit(${rowId})" src="${acceptImage}" alt="Accept"></td>`
 
+// generate text-input
+const generateTextInput = (todoValue) => `<input type="text" class="editInput" value="${todoValue}">`
+
 // its used in add-ToDo
 let idCounter = 1;
 
@@ -284,7 +287,7 @@ function edit(id) {
     // clear edit button and edit image
     editButton.remove();
     // set input-field with todo-text
-    todoTd.innerHTML = `<input type="text" class="editInput" value="${todoValue}">`;
+    todoTd.innerHTML = generateTextInput(todoValue);
     // generate accept edit button as image
     const acceptEditButton = generateAcceptButton(id,acceptImage);
     // set accept button in third td
