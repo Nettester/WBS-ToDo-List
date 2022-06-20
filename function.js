@@ -297,7 +297,7 @@ function editToDo(id) {
 
 function acceptEdit(id) {
     // get table row
-    const row = row(id);
+    const row = tableRow(id);
     // get td with todo-text
     const todoTd = row.querySelector(".text");
     // get text-input element / accept button
