@@ -10,7 +10,7 @@ const generateDeleteButton = (rowId) => `<input type="image" class="delButton" o
 const generateAcceptButton = (rowId) => `<input type="image" class="acceptButton" onclick="acceptEdit(${rowId})" src="${acceptImage}" alt="Accept"></td>`
 
 // generate text-input
-const generateTextInput = (todoValue) => `<input type="text" class="editInput" value="${todoValue}">`
+const generateTextInput = (todoValue) => `<input type="text" class="editInput" value="${todoValue}" placeholder="ToDo eintragen">`
 
 // its used in add-ToDo
 let idCounter = 1;
@@ -245,9 +245,9 @@ function add() {
 
     zeile.id = `tr_id_${idCounter}`;
     zeile.innerHTML = `<td><input type="checkbox" class="form-check-input" value="checkedValue" ></td> `;
-    zeile.innerHTML +=`<td class="text"></td>`;
-    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="editToDo(${idCounter})" src="${editImage}" alt="Edit"></td>`;
-    zeile.innerHTML +=`<td><input type="image" class="delButton" onclick="del(${idCounter})" src="./images/delete.png" alt="Delete"></td>`;
+    zeile.innerHTML +=`<td class="text">${generateTextInput("")}</td>`;
+    zeile.innerHTML +=`<td>${generateAcceptButton(idCounter)}</td>`;
+    zeile.innerHTML +=`<td>${generateDeleteButton(idCounter)}</td>`;
 
 
     idCounter++;
