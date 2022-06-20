@@ -275,13 +275,14 @@ function del(index) {
 */
 function editToDo(id) {
     // get table row
-    const tableRow = tableRow(id);
+    const row = tableRow(id);
+    console.log(row);
     // get td with todo-text
-    const todoTd = tableRow.querySelector(".text");
+    const todoTd = row.querySelector(".text");
     // get value of the td
     const todoValue = todoTd.innerHTML;
     // get edit-button
-    const editButton = tableRow.querySelector(`.editButton`);
+    const editButton = row.querySelector(`.editButton`);
     // clear todo-text
     todoTd.innerText="";
     // clear edit button and edit image
@@ -291,17 +292,17 @@ function editToDo(id) {
     // generate accept edit button as image
     const acceptEditButton = generateAcceptButton(id,acceptImage);
     // set accept button in third td
-    tableRow.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
+    row.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
 }
 
 function acceptEdit(id) {
     // get table row
-    const tableRow = tableRow(id);
+    const row = row(id);
     // get td with todo-text
-    const todoTd = tableRow.querySelector(".text");
+    const todoTd = row.querySelector(".text");
     // get text-input element / accept button
     const editInput = todoTd.querySelector(".editInput");
-    const acceptButton = tableRow.querySelector(".acceptButton");
+    const acceptButton = row.querySelector(".acceptButton");
     // get value of the text-input element
     const todoValue = editInput.value;
     // generate edit-button (image as button)
@@ -311,7 +312,7 @@ function acceptEdit(id) {
     acceptButton.remove();
     // set todo-text / edit button
     todoTd.innerHTML = todoValue;
-    tableRow.querySelector("td:nth-child(3)").innerHTML = editButton;
+    row.querySelector("td:nth-child(3)").innerHTML = editButton;
 }
 
 
