@@ -293,6 +293,7 @@ function editToDo(id) {
     const acceptEditButton = generateAcceptButton(id,acceptImage);
     // set accept button in third td
     row.querySelector("td:nth-child(3)").innerHTML = acceptEditButton;
+    //document.querySelector("editInput").addEventListener("keypress", (event) => {if(event.key==="Enter"){acceptEdit(id)};});
 }
 
 function acceptEdit(id) {
