@@ -275,7 +275,7 @@ function del(index) {
 */
 function edit(id) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${id}`);
+    const tableRow = tableRow(id);
     // get td with todo-text
     const todoTd = tableRow.querySelector(".text");
     // get value of the td
@@ -296,7 +296,7 @@ function edit(id) {
 
 function acceptEdit(id) {
     // get table row
-    const tableRow = document.querySelector(`#tr_id_${id}`);
+    const tableRow = tableRow(id);
     // get td with todo-text
     const todoTd = tableRow.querySelector(".text");
     // get text-input element / accept button
