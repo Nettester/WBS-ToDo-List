@@ -23,15 +23,23 @@ let list = document.getElementById("list");
         }
     }
 */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * Die Funktion newTodo erzeugt ein neues Objekt,
+ * mit den Parametern _name und _date und gibt 
+ * das Objekt zurück. Dieses Objekt enthält die
+ * Daten zu einer einzigen Todo-Liste.
+ * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 function newTodo( _name, _date ){
     return {
-        name : _name, 
-        date : _date,
-        totalLifetime : null,
-        totalCurrent : null,
-        totalChecked : null,
-        totalUnchecked : null,
-        item : [] 
+        name : _name,           // Name der Todoliste
+        date : _date,           // Datum
+        totalLifetime : null,   // ?
+        totalCurrent : null,    // Menge der Einträge insgesamt
+        totalChecked : null,    // Menge der erledigten Einträge
+        totalUnchecked : null,  // Menge der offenen Einträge
+        item : []  // Die Einträge selbst
     };
 }
 
@@ -39,109 +47,164 @@ function newTodo( _name, _date ){
 class Manager{
     constructor(){
         // todos arry 
-        this._todoArray=[];
+        this._todoArray=[]; // Enthält die Todolisten
         // atuell todo
-        this._currentToDo = null;
+        this._currentToDo = null; // Gibt den Index der aktuell zu bearbeitenden Todoliste zurück
     }
+    // Erstellt eine neue Todoliste
     addToDo(name, datum) {
         this._todoArray.push(newTodo(name, datum));
     }
+    // Wählt eine Todoliste, sodass dieser bearbeitet werden kann
     selectTodo(namelabel){
+        // Durchlauf aller Todolisten
         for(let i=0; i<this._todoArray.length; i++){
+            // Wenn die Liste mit der gesuchten Name gefunden
+            // wird, so wird dessen Index in die currentTodo
+            // notiert.
             if(this._todoArray[i].name === namelabel ){
                 this._currentToDo = i;
                 break;
             }
         }
     }
+    // Fügt ein Eintrag in die gewählte Todolite
     addItem(check, text){
+        // Wenn noch keine Todoliste gewählt ist, gibt es eine Fehlermeldung
         if(this._currentToDo === null){
             console.log("keine todo ausgewaehlt");
         }else{
+            // Die aktuelle Todoliste wird verknüpft
             const target = this._todoArray[this._currentToDo];
+            // Der Parameter-Check wird geprüft, wenn sie
+            // gesetzt ist, wird totalChecked erhöht,
+            // andernfalls totalunchecked erhöht
             if(check === true){
                 target.totalChecked++;
             }else{
                 target.totalUnchecked++;
             }
+            // Der Eintrag wird in die Todoliste eingefügt
             target.item.push([check, text]);
+            // Die Gesamtmenge der Einträge wird erhöht
             target.totalCurrent++;
         }
     }
+    // Hier wird ein Eintrag aus der gewählten Todoliste wieder entfernt
     removeItem(index){
+        // Wenn noch keine Todoliste gewählt ist, gibt es eine Fehlermeldung
         if(this._currentToDo === null){
             console.log("keine todo ausgewaehlt");
         }else{
+            // Die Todoliste wird verknüpft
             const target = this._todoArray[this._currentToDo];
+            // Der Eintrag wird entfernt
             target.item.splice(index,1);
         }
     }
+    // Hier wird die Todoliste mit dem Namen "name" gelöscht
     removeToDo(name){
         for(let i=0; i<this._todoArray.length; i++){
+            // Wenn die Todoliste mit dem Namen "name" gefunden
+            // ist...
             if(this._todoArray[i].name === namelabel ){
+                // Wird sie entfernt
                 this._todoArray.splice(i, 1);
                 return;
             }
         }
     }
-    // anzahle der todolist 
+    // Die Todolisten werden alle in den localStorage hochgeladen
     uploadAll(){
+        // Die Anzahl der Todolisten wird in die localStorage geschrieben
         localStorage.setItem('todoCount',this._todoArray.length);
+        // Und die Schleife läuft jede Todoliste durch
         for(let i=0; i<this._todoArray.length; i++){
+            // der nächste Todolist-Objekt wird verknüpft
             let todolist = this._todoArray[i];
+            // Ihr wird ein KeyName für die localStorage erzeugt
             let name = "todo."+i;
+            // Der Name wird in die localStorage eingetragen
             localStorage.setItem(name, todolist.name);
+            // Die Menge aller Einträge werden geschrieben
             localStorage.setItem(name+".current", todolist.totalCurrent);
+            // Die Menge aller erledigten Einträge werden geschrieben
             localStorage.setItem(name+".checked", todolist.totalChecked);
+            // Die Menge aller offenen Einträge werden geschrieben
             localStorage.setItem(name+".unChecked", todolist.totalUnchecked);
+            // Nun werden die Einträge selbst durchlaufen
             for(let x=0; x<todolist.item.length; x++){
+                // Der Hook-Zustand eines Eintrags wird in den localStorage geschrieben
                 localStorage.setItem(name+".item.check."+x, todolist.item[x][0]);
+                // Der Text eines Eintrags wird in den localStorage geschrieben
                 localStorage.setItem(name+".item.text."+x, todolist.item[x][1]);
-                
             }
         }
-
     }
+    // Nur die aktuelle Todoliste wird in den localStorage hochgeladen
     uploadToDo(){
+        // Wenn noch keine Todoliste gewählt ist, gibt es eine Fehlermeldung
         if(this._currentToDo === null){
             console.log("keine todo ausgewaehlt");
         }else{
+            // der nächste Todolist-Objekt wird verknüpft
             let todolist = this._todoArray[this._currentToDo];
+            // Ihr wird ein KeyName für die localStorage erzeugt
             let name = "todo."+this._currentToDo;
+            // Der Name wird in die localStorage eingetragen
             localStorage.setItem(name, todolist.name);
+            // Die Menge aller Einträge werden geschrieben
             localStorage.setItem(name+".current", todolist.totalCurrent);
+            // Die Menge aller erledigten Einträge werden geschrieben
             localStorage.setItem(name+".checked", todolist.totalChecked);
+            // Die Menge aller offenen Einträge werden geschrieben
             localStorage.setItem(name+".unChecked", todolist.totalUnchecked);
+            // Nun werden die Einträge selbst durchlaufen
             for(let x=0; x<todolist.item.length; x++){
+                // Der Hook-Zustand eines Eintrags wird in den localStorage geschrieben
                 localStorage.setItem(name+".item.check."+x, todolist.item[x][0]);
+                // Der Text eines Eintrags wird in den localStorage geschrieben
                 localStorage.setItem(name+".item.text."+x, todolist.item[x][1]);
-                
             }
         }
-
     }
+    // Alle Todolisten im localStorage werden wieder in den Browser-Umgebung zurückgeladen
     downloadAll(){
+        // Zuerst die Anzahl der Todolisten
         const menge = localStorage.getItem("todoCount");
+        // Wir brauchen einen Index für den KeyName und der beginnt bereits bei 0.
         let index = 0;
+        // Die Schleife durchläuft nun die localStorage für die Todolisten
         for(let m=0; m < menge; m++){
+            // Wir erzeugen wieder einen KeyName für den nächsten Todoliste
             let name = "todo."+index;
+            // Nun erzeugen wir einen neuen Todolist-Objekt
             let target = newTodo(name, " ");
-            target.name = name;
+            // Wir lesen den Namen der Todoliste wieder ein
+            target.name = localStorage.getItem(name);
+            // Anschließend die Menge der Einträge
             target.totalCurrent= localStorage.getItem(name+".current");
+            // Anschließend die Menge der erledigten Einträge
             target.totalChecked= localStorage.getItem(name+".checked");
+            // Anschließend die Menge der offenen Einträge
             target.totalUnchecked= localStorage.getItem(name+".unchecked");
+            // Wir durchlaufen wieder die Einträge selbst
             for(let l=0; l<target.totalCurrent; l++){
+                // Erzeugen einen neuen Value-Array
                 let value = [];
+                // In den Value-Array wird zuerst der nächste Eintrags-Hakenzustand gelesen
                 value.push(localStorage.getItem(name+".item.check."+l));
+                // dann der Text
                 value.push(localStorage.getItem(name+".item.text."+l));
+                // Dann wird der Array in den Eintragsarray der Todoliste eingefügt
                 target.item.push(value);
+                // und wieder geleert für den nächsten Eintrag
                 value = [];
             }
-    
-
+            // das frisch angelegte Objekt wird nun in die Klasse hinzufügt
+            this._todoArray.push(target);
         }
     }
-
     
 }
 // name : _name, 
