@@ -368,11 +368,3 @@ function checked ()
 
     return true;
 }
-
-setInterval( function () {
-        checked();
-}, 500);
-
-
-
-
