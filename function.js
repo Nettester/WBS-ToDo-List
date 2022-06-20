@@ -273,7 +273,7 @@ function del(index) {
 /*
    David 
 */
-function edit(id) {
+function editToDo(id) {
     // get table row
     const tableRow = tableRow(id);
     // get td with todo-text
