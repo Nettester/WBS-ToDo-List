@@ -246,7 +246,7 @@ function add() {
     zeile.id = `tr_id_${idCounter}`;
     zeile.innerHTML = `<td><input type="checkbox" class="form-check-input" value="checkedValue" ></td> `;
     zeile.innerHTML +=`<td class="text"></td>`;
-    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="edit(${idCounter})" src="${editImage}" alt="Edit"></td>`;
+    zeile.innerHTML +=`<td><input type="image" class="editButton" onclick="editToDo(${idCounter})" src="${editImage}" alt="Edit"></td>`;
     zeile.innerHTML +=`<td><input type="image" class="delButton" onclick="del(${idCounter})" src="./images/delete.png" alt="Delete"></td>`;
 
 
